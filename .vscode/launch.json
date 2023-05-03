@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Checkpoint2Application<checkpoint2>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.com.fiap.checkpoint2.Checkpoint2Application",
+            "projectName": "checkpoint2",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -1,6 +1,5 @@
 package br.com.fiap.checkpoint2.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +18,15 @@ import br.com.fiap.checkpoint2.dto.ProdutoDto;
 import br.com.fiap.checkpoint2.dto.ProdutoUpdateDto;
 import br.com.fiap.checkpoint2.model.ProdutoModel;
 import br.com.fiap.checkpoint2.service.ProdutoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/produtos")
+@Tag(name = "Produtos", description = "Manutenção de informações sobre os Produtos.")
 public class ProdutoController {
     
     @Autowired
     private ProdutoService produtoService;
-    
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     @PostMapping
     @ResponseBody

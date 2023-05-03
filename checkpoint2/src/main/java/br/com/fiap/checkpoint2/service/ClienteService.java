@@ -22,8 +22,7 @@ public class ClienteService {
     }
 
     public ClienteDto findById(Long codigoCliente) {
-        ClienteModel cliente = clienteRepository.findById(codigoCliente).get();
-        return modelToDto(cliente);
+        return modelToDto(clienteRepository.findById(codigoCliente).get());
     }
 
     public List<ClienteDto> findAll() {

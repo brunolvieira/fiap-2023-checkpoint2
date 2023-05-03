@@ -4,16 +4,16 @@ import java.util.Date;
 
 public class PedidoDto {
     
-    private Long numero_pedido;
+    private Long numeroPedido;
     private Long codigoCliente;
     private Date dataPedido;
 
-    public Long getNumero_pedido() {
-        return numero_pedido;
+    public Long getNumeroPedido() {
+        return numeroPedido;
     }
 
-    public void setNumero_pedido(Long numero_pedido) {
-        this.numero_pedido = numero_pedido;
+    public void setNumeroPedido(Long numeroPedido) {
+        this.numeroPedido = numeroPedido;
     }
 
     public Long getCodigoCliente() {

@@ -22,13 +22,12 @@ public class ProdutoService {
     }
 
     public ProdutoDto findById(Long codigoProduto) {
-        ProdutoModel produto = produtoRepository.findById(codigoProduto).get();
-        return modelToDto(produto);
+        return modelToDto(produtoRepository.findById(codigoProduto).get());
     }
 
     public List<ProdutoDto> findAll() {
 
-        List<ProdutoModel>listModel = produtoRepository.findAll();
+        List<ProdutoModel> listModel = produtoRepository.findAll();
         List<ProdutoDto> listDto = new ArrayList<>();
 
         for(ProdutoModel produto : listModel) {
@@ -43,7 +42,7 @@ public class ProdutoService {
         Optional<ProdutoModel> opProdutoUpdate = produtoRepository.findById(codigoProduto);
 
         if(!opProdutoUpdate.isPresent()) {
-            throw new RuntimeException("Código: " + codigoProduto + " nao encontrado!");
+            throw new RuntimeException("Código: " + codigoProduto + " não encontrado!");
         }
 
         ProdutoModel produtoUpdate = opProdutoUpdate.get();
@@ -62,12 +61,10 @@ public class ProdutoService {
         Optional<ProdutoModel> opProdutoDelete = produtoRepository.findById(codigoProduto);
 
         if(!opProdutoDelete.isPresent()) {
-            throw new RuntimeException("Código: " + codigoProduto + " nao encontrado!");
+            throw new RuntimeException("Código: " + codigoProduto + " não encontrado!");
         }
 
-        ProdutoModel produtoDelete = opProdutoDelete.get();
-
-        produtoRepository.delete(produtoDelete);
+        produtoRepository.delete(opProdutoDelete.get());
     }
 
     public ProdutoDto modelToDto(ProdutoModel model) {

@@ -1,6 +1,6 @@
 package br.com.fiap.checkpoint2.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +21,7 @@ public class PedidoModel {
     private Long codigoCliente;
 
     @Column(name = "data_pedido")
-    private Date dataPedido;
+    private LocalDate dataPedido;
 
     public Long getNumero_pedido() {
         return numero_pedido;
@@ -39,11 +39,11 @@ public class PedidoModel {
         this.codigoCliente = codigoCliente;
     }
 
-    public Date getDataPedido() {
+    public LocalDate getDataPedido() {
         return dataPedido;
     }
 
-    public void setDataPedido(Date dataPedido) {
+    public void setDataPedido(LocalDate dataPedido) {
         this.dataPedido = dataPedido;
     }
 }

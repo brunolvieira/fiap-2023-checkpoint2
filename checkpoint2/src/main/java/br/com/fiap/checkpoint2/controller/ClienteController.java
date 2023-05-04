@@ -57,19 +57,33 @@ public class ClienteController {
 
     @PutMapping("/{codigoCliente}")
     @ResponseBody
-    public ClienteResponseDTO update(@PathVariable Long codigoCliente, @RequestBody ClienteUpdateDTO updateDto) {
+    public ClienteResponseDTO update(@PathVariable Long codigoCliente, @RequestBody ClienteUpdateDTO clienteUpdate) {
 
-        ClienteModel clienteModel = new ClienteModel();
+        Boolean clienteExiste = clienteService.existsById(codigoCliente);
 
-        clienteModel.setNome(updateDto.getNome());
-        clienteModel.setInscricaoFederal(updateDto.getInscricaoFederal());
-        clienteModel.setCep(updateDto.getCep());
+        if(!clienteExiste) {
+            throw new RuntimeException("Cliente " + codigoCliente + " não encontrado!");
+        }
 
-        return clienteService.update(codigoCliente, clienteModel);
+        ClienteModel cliente = new ClienteModel();
+
+        cliente.setCodigoCliente(codigoCliente);
+        cliente.setNome(clienteUpdate.getNome());
+        cliente.setInscricaoFederal(clienteUpdate.getInscricaoFederal());
+        cliente.setCep(clienteUpdate.getCep());
+
+        return clienteService.save(cliente);
     }
 
     @DeleteMapping("/{codigoCliente}")
     public void delete(@PathVariable Long codigoCliente) {
+
+        Boolean clienteExiste = clienteService.existsById(codigoCliente);
+
+        if(!clienteExiste) {
+            throw new RuntimeException("Cliente " + codigoCliente + " não encontrado!");
+        }
+        
         clienteService.delete(codigoCliente);
     }
 }

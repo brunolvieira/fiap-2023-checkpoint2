@@ -1,6 +1,6 @@
 package br.com.fiap.checkpoint2.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,10 +24,10 @@ public class ProdutoModel {
     private Double preco;
 
     @Column(name = "data_validade")
-    private Date dataValidade;
+    private LocalDate dataValidade;
 
     @Column(name = "data_garantia")
-    private Date dataGarantia;
+    private LocalDate dataGarantia;
 
     @Column(name = "em_estoque")
     private Integer emEstoque;
@@ -56,19 +56,19 @@ public class ProdutoModel {
         this.preco = preco;
     }
 
-    public Date getDataValidade() {
+    public LocalDate getDataValidade() {
         return dataValidade;
     }
 
-    public void setDataValidade(Date dataValidade) {
+    public void setDataValidade(LocalDate dataValidade) {
         this.dataValidade = dataValidade;
     }
 
-    public Date getDataGarantia() {
+    public LocalDate getDataGarantia() {
         return dataGarantia;
     }
 
-    public void setDataGarantia(Date dataGarantia) {
+    public void setDataGarantia(LocalDate dataGarantia) {
         this.dataGarantia = dataGarantia;
     }
 

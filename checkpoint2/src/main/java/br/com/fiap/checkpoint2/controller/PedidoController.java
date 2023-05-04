@@ -30,12 +30,12 @@ public class PedidoController {
 
     @PostMapping
     @ResponseBody
-    public PedidoResponseDTO save(@RequestBody PedidoCreateDTO pedidoDto) {
+    public PedidoResponseDTO save(@RequestBody PedidoCreateDTO novoPedido) {
 
         PedidoModel pedidoModel = new PedidoModel();
 
-        pedidoModel.setCodigoCliente(pedidoDto.getCodigoCliente());
-        pedidoModel.setDataPedido(pedidoDto.getDataPedido());
+        pedidoModel.setCodigoCliente(novoPedido.getCodigoCliente());
+        pedidoModel.setDataPedido(novoPedido.getDataPedido());
 
         return pedidoService.save(pedidoModel);
     }
@@ -54,18 +54,32 @@ public class PedidoController {
 
     @PutMapping("/{numeroPedido}")
     @ResponseBody
-    public PedidoResponseDTO update(@PathVariable Long numeroPedido, @RequestBody PedidoUpdateDTO updateDto) {
+    public PedidoResponseDTO update(@PathVariable Long numeroPedido, @RequestBody PedidoUpdateDTO pedidoUpdate) {
+
+        Boolean pedidoExiste = pedidoService.existsById(numeroPedido);
+
+        if(!pedidoExiste) {
+            throw new RuntimeException("Pedido " + numeroPedido + "não encontrado!");
+        }
         
-        PedidoModel pedidoModel = new PedidoModel();
+        PedidoModel pedido = new PedidoModel();
 
-        pedidoModel.setCodigoCliente(updateDto.getCodigoCliente());
-        pedidoModel.setDataPedido(updateDto.getDataPedido());
+        pedido.setNumero_pedido(numeroPedido);
+        pedido.setCodigoCliente(pedidoUpdate.getCodigoCliente());
+        pedido.setDataPedido(pedidoUpdate.getDataPedido());
 
-        return pedidoService.update(numeroPedido, pedidoModel);
+        return pedidoService.save(pedido);
     }
 
     @DeleteMapping("/{numeroPedido}")
     public void delete(@PathVariable Long numeroPedido) {
+
+        Boolean pedidoExiste = pedidoService.existsById(numeroPedido);
+
+        if(!pedidoExiste) {
+            throw new RuntimeException("Pedido " + numeroPedido + " não encontrado!");
+        }
+
         pedidoService.delete(numeroPedido);
     }
 }

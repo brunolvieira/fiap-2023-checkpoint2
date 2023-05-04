@@ -1,14 +1,14 @@
 package br.com.fiap.checkpoint2.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ProdutoResponseDTO {
     
     private Long codigoProduto;
     private String nome;
     private Double preco;
-    private Date dataValidade;
-    private Date dataGarantia;
+    private LocalDate dataValidade;
+    private LocalDate dataGarantia;
     private Integer emEstoque;
 
     public Long getCodigoProduto() {
@@ -35,19 +35,19 @@ public class ProdutoResponseDTO {
         this.preco = preco;
     }
 
-    public Date getDataValidade() {
+    public LocalDate getDataValidade() {
         return dataValidade;
     }
 
-    public void setDataValidade(Date dataValidade) {
+    public void setDataValidade(LocalDate dataValidade) {
         this.dataValidade = dataValidade;
     }
 
-    public Date getDataGarantia() {
+    public LocalDate getDataGarantia() {
         return dataGarantia;
     }
 
-    public void setDataGarantia(Date dataGarantia) {
+    public void setDataGarantia(LocalDate dataGarantia) {
         this.dataGarantia = dataGarantia;
     }
 

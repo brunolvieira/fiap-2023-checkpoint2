@@ -2,7 +2,6 @@ package br.com.fiap.checkpoint2.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +16,12 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public ProdutoResponseDTO save(ProdutoModel produtoModel) {
-        return modelToDto(produtoRepository.save(produtoModel));
+    public Boolean existsById(Long codigoProduto) {
+        return produtoRepository.existsById(codigoProduto);
+    }
+
+    public ProdutoResponseDTO save(ProdutoModel novoProduto) {
+        return modelToDto(produtoRepository.save(novoProduto));
     }
 
     public ProdutoResponseDTO findById(Long codigoProduto) {
@@ -37,37 +40,11 @@ public class ProdutoService {
         return listDto;
     }
 
-    public ProdutoResponseDTO update(Long codigoProduto, ProdutoModel produtoModel) {
-
-        Optional<ProdutoModel> opProdutoUpdate = produtoRepository.findById(codigoProduto);
-
-        if(!opProdutoUpdate.isPresent()) {
-            throw new RuntimeException("Código: " + codigoProduto + " não encontrado!");
-        }
-
-        ProdutoModel produtoUpdate = opProdutoUpdate.get();
-
-        produtoUpdate.setNome(produtoModel.getNome());
-        produtoUpdate.setPreco(produtoModel.getPreco());
-        produtoUpdate.setDataValidade(produtoModel.getDataValidade());
-        produtoUpdate.setDataGarantia(produtoModel.getDataGarantia());
-        produtoUpdate.setEmEstoque(produtoModel.getEmEstoque());
-
-        return modelToDto(produtoRepository.save(produtoUpdate));
-    }
-
     public void delete(Long codigoProduto) {
-
-        Optional<ProdutoModel> opProdutoDelete = produtoRepository.findById(codigoProduto);
-
-        if(!opProdutoDelete.isPresent()) {
-            throw new RuntimeException("Código: " + codigoProduto + " não encontrado!");
-        }
-
-        produtoRepository.delete(opProdutoDelete.get());
+        produtoRepository.delete(produtoRepository.findById(codigoProduto).get());
     }
 
-    public ProdutoResponseDTO modelToDto(ProdutoModel model) {
+    private static ProdutoResponseDTO modelToDto(ProdutoModel model) {
 
         ProdutoResponseDTO dto = new ProdutoResponseDTO();
 

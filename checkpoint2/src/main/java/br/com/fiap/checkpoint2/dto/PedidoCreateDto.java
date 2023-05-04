@@ -1,11 +1,11 @@
 package br.com.fiap.checkpoint2.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PedidoCreateDTO {
 
     private Long codigoCliente;
-    private Date dataPedido;
+    private LocalDate dataPedido;
 
     public Long getCodigoCliente() {
         return codigoCliente;
@@ -15,11 +15,11 @@ public class PedidoCreateDTO {
         this.codigoCliente = codigoCliente;
     }
 
-    public Date getDataPedido() {
+    public LocalDate getDataPedido() {
         return dataPedido;
     }
 
-    public void setDataPedido(Date dataPedido) {
+    public void setDataPedido(LocalDate dataPedido) {
         this.dataPedido = dataPedido;
     }
 }

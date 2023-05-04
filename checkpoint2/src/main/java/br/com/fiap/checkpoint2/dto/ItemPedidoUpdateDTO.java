@@ -1,20 +1,11 @@
 package br.com.fiap.checkpoint2.dto;
 
-public class ItensPedidoResponseDTO {
+public class ItemPedidoUpdateDTO {
     
-    private Long sequencia;
     private Long numeroPedido;
     private Long codigoProduto;
     private Integer quantidade;
     private Double valorTotal;
-
-    public Long getSequencia() {
-        return sequencia;
-    }
-
-    public void setSequencia(Long sequencia) {
-        this.sequencia = sequencia;
-    }
 
     public Long getNumeroPedido() {
         return numeroPedido;

@@ -30,15 +30,15 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseBody
-    public ProdutoResponseDTO save(@RequestBody ProdutoCreateDTO produtoDto) {
+    public ProdutoResponseDTO save(@RequestBody ProdutoCreateDTO novoProduto) {
 
         ProdutoModel produtoModel = new ProdutoModel();
 
-        produtoModel.setNome(produtoDto.getNome());
-        produtoModel.setPreco(produtoDto.getPreco());
-        produtoModel.setDataValidade(produtoDto.getDataValidade());
-        produtoModel.setDataGarantia(produtoDto.getDataGarantia());
-        produtoModel.setEmEstoque(produtoDto.getEmEstoque());
+        produtoModel.setNome(novoProduto.getNome());
+        produtoModel.setPreco(novoProduto.getPreco());
+        produtoModel.setDataValidade(novoProduto.getDataValidade());
+        produtoModel.setDataGarantia(novoProduto.getDataGarantia());
+        produtoModel.setEmEstoque(novoProduto.getEmEstoque());
 
         return produtoService.save(produtoModel);
     }
@@ -57,21 +57,35 @@ public class ProdutoController {
 
     @PutMapping("/{codigoProduto}")
     @ResponseBody
-    public ProdutoResponseDTO update(@PathVariable Long codigoProduto, @RequestBody ProdutoUpdateDto produtoDto) {
+    public ProdutoResponseDTO update(@PathVariable Long codigoProduto, @RequestBody ProdutoUpdateDto produtoUpdate) {
 
-        ProdutoModel produtoModel = new ProdutoModel();
+        Boolean produtoExiste = produtoService.existsById(codigoProduto);
 
-        produtoModel.setNome(produtoDto.getNome());
-        produtoModel.setPreco(produtoDto.getPreco());
-        produtoModel.setDataValidade(produtoDto.getDataValidade());
-        produtoModel.setDataGarantia(produtoDto.getDataGarantia());
-        produtoModel.setEmEstoque(produtoDto.getEmEstoque());
+        if(!produtoExiste) {
+            throw new RuntimeException("Produto " + codigoProduto + " não encontrado!");
+        }
 
-        return produtoService.update(codigoProduto, produtoModel);
+        ProdutoModel produto = new ProdutoModel();
+
+        produto.setCodigoProduto(codigoProduto);
+        produto.setNome(produtoUpdate.getNome());
+        produto.setPreco(produtoUpdate.getPreco());
+        produto.setDataValidade(produtoUpdate.getDataValidade());
+        produto.setDataGarantia(produtoUpdate.getDataGarantia());
+        produto.setEmEstoque(produtoUpdate.getEmEstoque());
+
+        return produtoService.save(produto);
     }
 
     @DeleteMapping("/{codigoProduto}")
     public void delete(@PathVariable Long codigoProduto) {
+
+        Boolean produtoExiste = produtoService.existsById(codigoProduto);
+
+        if(!produtoExiste) {
+            throw new RuntimeException("Produto " + codigoProduto + " não encontrado!");
+        }
+        
         produtoService.delete(codigoProduto);
     }
 }

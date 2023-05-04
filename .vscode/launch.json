@@ -7,8 +7,18 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "br.com.fiap.checkpoint2.Checkpoint2Application",
             "projectName": "checkpoint2",
-            "args": "",
+            "args": "--spring.profiles.active=local",
             "envFile": "${workspaceFolder}/.env"
-        }
+        },
+        {
+            "type": "java",
+            "name": "PRD - Spring Boot-Checkpoint2Application<checkpoint2>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.com.fiap.checkpoint2.Checkpoint2Application",
+            "projectName": "checkpoint2",
+            "args": "--spring.profiles.active=prd",
+            "envFile": "${workspaceFolder}/.env"
+        },
     ]
 }

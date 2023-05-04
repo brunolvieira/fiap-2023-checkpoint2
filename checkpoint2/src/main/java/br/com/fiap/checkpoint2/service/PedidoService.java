@@ -2,7 +2,6 @@ package br.com.fiap.checkpoint2.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +16,12 @@ public class PedidoService {
     @Autowired
     PedidoRepository pedidoRepository;
 
-    public PedidoResponseDTO save(PedidoModel pedidoModel) {
-        return modelToDto(pedidoRepository.save(pedidoModel));
+    public Boolean existsById(Long numeroPedido) {
+        return pedidoRepository.existsById(numeroPedido);
+    }
+
+    public PedidoResponseDTO save(PedidoModel novoPedido) {
+        return modelToDto(pedidoRepository.save(novoPedido));
     }
 
     public PedidoResponseDTO findById(Long numeroPedido) {
@@ -37,34 +40,11 @@ public class PedidoService {
         return listDto;
     }
 
-    public PedidoResponseDTO update(Long numeroPedido, PedidoModel pedidoModel) {
-
-        Optional<PedidoModel> opPedidoUpdate = pedidoRepository.findById(numeroPedido);
-
-        if(!opPedidoUpdate.isPresent()) {
-            throw new RuntimeException("Código: " + numeroPedido + "não encontrado!");
-        }
-
-        PedidoModel pedidoUpdate = opPedidoUpdate.get();
-
-        pedidoUpdate.setCodigoCliente(pedidoModel.getCodigoCliente());
-        pedidoUpdate.setDataPedido(pedidoModel.getDataPedido());
-
-        return modelToDto(pedidoRepository.save(pedidoUpdate));
-    }
-
     public void delete(Long numeroPedido) {
-
-         Optional<PedidoModel> opPedidoDelete = pedidoRepository.findById(numeroPedido);
-
-         if(!opPedidoDelete.isPresent()) {
-            throw new RuntimeException("Código: " + numeroPedido + " não encontrado!");
-        }
-
-        pedidoRepository.delete(opPedidoDelete.get());
+        pedidoRepository.delete(pedidoRepository.findById(numeroPedido).get());
     }
 
-    public PedidoResponseDTO modelToDto(PedidoModel model) {
+    private static PedidoResponseDTO modelToDto(PedidoModel model) {
 
         PedidoResponseDTO dto = new PedidoResponseDTO();
 

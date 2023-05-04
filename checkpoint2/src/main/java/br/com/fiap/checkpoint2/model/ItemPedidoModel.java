@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "itens_pedidos")
-public class ItensPedidoModel {
+public class ItemPedidoModel {
     
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.checkpoint2.dto.ProdutoCreateDto;
-import br.com.fiap.checkpoint2.dto.ProdutoDto;
+import br.com.fiap.checkpoint2.dto.ProdutoCreateDTO;
+import br.com.fiap.checkpoint2.dto.ProdutoResponseDTO;
 import br.com.fiap.checkpoint2.dto.ProdutoUpdateDto;
 import br.com.fiap.checkpoint2.model.ProdutoModel;
 import br.com.fiap.checkpoint2.service.ProdutoService;
@@ -30,7 +30,7 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseBody
-    public ProdutoDto save(@RequestBody ProdutoCreateDto produtoDto) {
+    public ProdutoResponseDTO save(@RequestBody ProdutoCreateDTO produtoDto) {
 
         ProdutoModel produtoModel = new ProdutoModel();
 
@@ -45,19 +45,19 @@ public class ProdutoController {
 
     @GetMapping("/{codigoProduto}")
     @ResponseBody
-    public ProdutoDto findById(@PathVariable Long codigoProduto) {
+    public ProdutoResponseDTO findById(@PathVariable Long codigoProduto) {
         return produtoService.findById(codigoProduto);
     }
 
     @GetMapping
     @ResponseBody
-    public List<ProdutoDto> findAll() {
+    public List<ProdutoResponseDTO> findAll() {
         return produtoService.findAll();
     }
 
     @PutMapping("/{codigoProduto}")
     @ResponseBody
-    public ProdutoDto update(@PathVariable Long codigoProduto, @RequestBody ProdutoUpdateDto produtoDto) {
+    public ProdutoResponseDTO update(@PathVariable Long codigoProduto, @RequestBody ProdutoUpdateDto produtoDto) {
 
         ProdutoModel produtoModel = new ProdutoModel();
 

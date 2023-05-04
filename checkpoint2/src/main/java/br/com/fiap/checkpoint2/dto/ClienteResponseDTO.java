@@ -1,7 +1,7 @@
 package br.com.fiap.checkpoint2.dto;
 
 
-public class ClienteDto {
+public class ClienteResponseDTO {
     
     private Long codigoCliente;
     private String nome;

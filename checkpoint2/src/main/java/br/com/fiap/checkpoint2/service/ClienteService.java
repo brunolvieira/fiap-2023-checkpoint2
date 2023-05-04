@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.checkpoint2.dto.ClienteDto;
+import br.com.fiap.checkpoint2.dto.ClienteResponseDTO;
 import br.com.fiap.checkpoint2.model.ClienteModel;
 import br.com.fiap.checkpoint2.repository.ClienteRepository;
 
@@ -17,18 +17,18 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public ClienteDto save(ClienteModel clienteModel) {
-        return modelToDto(clienteRepository.save(clienteModel));
+    public ClienteResponseDTO save(ClienteModel novoCliente) {
+        return modelToDto(clienteRepository.save(novoCliente));
     }
 
-    public ClienteDto findById(Long codigoCliente) {
+    public ClienteResponseDTO findById(Long codigoCliente) {
         return modelToDto(clienteRepository.findById(codigoCliente).get());
     }
 
-    public List<ClienteDto> findAll() {
+    public List<ClienteResponseDTO> findAll() {
 
-        List<ClienteModel>listModel = clienteRepository.findAll();
-        List<ClienteDto> listDto = new ArrayList<>();
+        List<ClienteModel> listModel = clienteRepository.findAll();
+        List<ClienteResponseDTO> listDto = new ArrayList<>();
 
         for(ClienteModel cliente : listModel) {
             listDto.add(modelToDto(cliente));
@@ -37,7 +37,7 @@ public class ClienteService {
         return listDto;
     }
 
-    public ClienteDto update(Long codigoCliente, ClienteModel clienteModel) {
+    public ClienteResponseDTO update(Long codigoCliente, ClienteModel cliente) {
 
         Optional<ClienteModel> opClienteUpdate = clienteRepository.findById(codigoCliente);
 
@@ -47,9 +47,9 @@ public class ClienteService {
 
         ClienteModel clienteUpdate = opClienteUpdate.get();
 
-        clienteUpdate.setNome(clienteModel.getNome());
-        clienteUpdate.setInscricaoFederal(clienteModel.getInscricaoFederal());
-        clienteUpdate.setCep(clienteModel.getCep());
+        clienteUpdate.setNome(cliente.getNome());
+        clienteUpdate.setInscricaoFederal(cliente.getInscricaoFederal());
+        clienteUpdate.setCep(cliente.getCep());
 
         return modelToDto(clienteRepository.save(clienteUpdate));
     }
@@ -59,17 +59,15 @@ public class ClienteService {
         Optional<ClienteModel> opClienteDelete = clienteRepository.findById(codigoCliente);
 
         if(!opClienteDelete.isPresent()) {
-            throw new RuntimeException("Código: " + codigoCliente + " nao encontrado!");
+            throw new RuntimeException("Código: " + codigoCliente + " não encontrado!");
         }
 
-        ClienteModel clienteDelete = opClienteDelete.get();
-
-        clienteRepository.delete(clienteDelete);
+        clienteRepository.delete(opClienteDelete.get());
     }
 
-    public ClienteDto modelToDto(ClienteModel model) {
+    public ClienteResponseDTO modelToDto(ClienteModel model) {
 
-        ClienteDto dto = new ClienteDto();
+        ClienteResponseDTO dto = new ClienteResponseDTO();
 
         dto.setCodigoCliente(model.getCodigoCliente());
         dto.setNome(model.getNome());

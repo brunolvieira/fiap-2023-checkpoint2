@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.checkpoint2.dto.ClienteCreateDto;
-import br.com.fiap.checkpoint2.dto.ClienteDto;
-import br.com.fiap.checkpoint2.dto.ClienteUpdateDto;
+import br.com.fiap.checkpoint2.dto.ClienteCreateDTO;
+import br.com.fiap.checkpoint2.dto.ClienteResponseDTO;
+import br.com.fiap.checkpoint2.dto.ClienteUpdateDTO;
 import br.com.fiap.checkpoint2.model.ClienteModel;
 import br.com.fiap.checkpoint2.service.ClienteService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,7 +32,7 @@ public class ClienteController {
 
     @PostMapping
     @ResponseBody
-    public ClienteDto save(@RequestBody ClienteCreateDto clienteDto) {
+    public ClienteResponseDTO save(@RequestBody ClienteCreateDTO clienteDto) {
 
         ClienteModel clienteModel = new ClienteModel();
 
@@ -45,19 +45,19 @@ public class ClienteController {
 
     @GetMapping("/{codigoCliente}")
     @ResponseBody
-    public ClienteDto findById(@PathVariable Long codigoCliente) {
+    public ClienteResponseDTO findById(@PathVariable Long codigoCliente) {
         return clienteService.findById(codigoCliente);
     }
 
     @GetMapping
     @ResponseBody
-    public List<ClienteDto> findAll() {
+    public List<ClienteResponseDTO> findAll() {
         return clienteService.findAll();
     }
 
     @PutMapping("/{codigoCliente}")
     @ResponseBody
-    public ClienteDto update(@PathVariable Long codigoCliente, @RequestBody ClienteUpdateDto updateDto) {
+    public ClienteResponseDTO update(@PathVariable Long codigoCliente, @RequestBody ClienteUpdateDTO updateDto) {
 
         ClienteModel clienteModel = new ClienteModel();
 

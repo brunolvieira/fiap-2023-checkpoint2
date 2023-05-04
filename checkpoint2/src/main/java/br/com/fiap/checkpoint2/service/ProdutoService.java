@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.checkpoint2.dto.ProdutoDto;
+import br.com.fiap.checkpoint2.dto.ProdutoResponseDTO;
 import br.com.fiap.checkpoint2.model.ProdutoModel;
 import br.com.fiap.checkpoint2.repository.ProdutoRepository;
 
@@ -17,18 +17,18 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public ProdutoDto save(ProdutoModel produtoModel) {
+    public ProdutoResponseDTO save(ProdutoModel produtoModel) {
         return modelToDto(produtoRepository.save(produtoModel));
     }
 
-    public ProdutoDto findById(Long codigoProduto) {
+    public ProdutoResponseDTO findById(Long codigoProduto) {
         return modelToDto(produtoRepository.findById(codigoProduto).get());
     }
 
-    public List<ProdutoDto> findAll() {
+    public List<ProdutoResponseDTO> findAll() {
 
         List<ProdutoModel> listModel = produtoRepository.findAll();
-        List<ProdutoDto> listDto = new ArrayList<>();
+        List<ProdutoResponseDTO> listDto = new ArrayList<>();
 
         for(ProdutoModel produto : listModel) {
             listDto.add(modelToDto(produto));
@@ -37,7 +37,7 @@ public class ProdutoService {
         return listDto;
     }
 
-    public ProdutoDto update(Long codigoProduto, ProdutoModel produtoModel) {
+    public ProdutoResponseDTO update(Long codigoProduto, ProdutoModel produtoModel) {
 
         Optional<ProdutoModel> opProdutoUpdate = produtoRepository.findById(codigoProduto);
 
@@ -67,9 +67,9 @@ public class ProdutoService {
         produtoRepository.delete(opProdutoDelete.get());
     }
 
-    public ProdutoDto modelToDto(ProdutoModel model) {
+    public ProdutoResponseDTO modelToDto(ProdutoModel model) {
 
-        ProdutoDto dto = new ProdutoDto();
+        ProdutoResponseDTO dto = new ProdutoResponseDTO();
 
         dto.setCodigoProduto(model.getCodigoProduto());
         dto.setNome(model.getNome());

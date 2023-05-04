@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.checkpoint2.dto.PedidoCreateDto;
-import br.com.fiap.checkpoint2.dto.PedidoDto;
-import br.com.fiap.checkpoint2.dto.PedidoUpdateDto;
+import br.com.fiap.checkpoint2.dto.PedidoCreateDTO;
+import br.com.fiap.checkpoint2.dto.PedidoResponseDTO;
+import br.com.fiap.checkpoint2.dto.PedidoUpdateDTO;
 import br.com.fiap.checkpoint2.model.PedidoModel;
 import br.com.fiap.checkpoint2.service.PedidoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,7 +30,7 @@ public class PedidoController {
 
     @PostMapping
     @ResponseBody
-    public PedidoDto save(@RequestBody PedidoCreateDto pedidoDto) {
+    public PedidoResponseDTO save(@RequestBody PedidoCreateDTO pedidoDto) {
 
         PedidoModel pedidoModel = new PedidoModel();
 
@@ -42,19 +42,19 @@ public class PedidoController {
 
     @GetMapping("/{numeroPedido}")
     @ResponseBody
-    public PedidoDto findById(@PathVariable Long numeroPedido) {
+    public PedidoResponseDTO findById(@PathVariable Long numeroPedido) {
         return pedidoService.findById(numeroPedido);
     }
 
     @GetMapping
     @ResponseBody
-    public List<PedidoDto> findAll() {
+    public List<PedidoResponseDTO> findAll() {
         return pedidoService.findAll();
     }
 
     @PutMapping("/{numeroPedido}")
     @ResponseBody
-    public PedidoDto update(@PathVariable Long numeroPedido, @RequestBody PedidoUpdateDto updateDto) {
+    public PedidoResponseDTO update(@PathVariable Long numeroPedido, @RequestBody PedidoUpdateDTO updateDto) {
         
         PedidoModel pedidoModel = new PedidoModel();
 

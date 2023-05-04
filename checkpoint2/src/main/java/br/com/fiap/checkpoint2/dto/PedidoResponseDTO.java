@@ -2,7 +2,7 @@ package br.com.fiap.checkpoint2.dto;
 
 import java.util.Date;
 
-public class PedidoDto {
+public class PedidoResponseDTO {
     
     private Long numeroPedido;
     private Long codigoCliente;

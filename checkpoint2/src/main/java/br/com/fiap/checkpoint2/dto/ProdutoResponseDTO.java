@@ -2,7 +2,7 @@ package br.com.fiap.checkpoint2.dto;
 
 import java.util.Date;
 
-public class ProdutoDto {
+public class ProdutoResponseDTO {
     
     private Long codigoProduto;
     private String nome;

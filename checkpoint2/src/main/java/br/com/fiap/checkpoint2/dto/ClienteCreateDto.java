@@ -1,6 +1,6 @@
 package br.com.fiap.checkpoint2.dto;
 
-public class ClienteCreateDto {
+public class ClienteCreateDTO {
     
     private String nome;
     private String inscricaoFederal;

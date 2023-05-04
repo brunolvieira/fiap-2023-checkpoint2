@@ -2,7 +2,7 @@ package br.com.fiap.checkpoint2.dto;
 
 import java.util.Date;
 
-public class ProdutoCreateDto {
+public class ProdutoCreateDTO {
 
     private String nome;
     private Double preco;

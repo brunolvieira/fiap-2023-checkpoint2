@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.checkpoint2.dto.PedidoDto;
+import br.com.fiap.checkpoint2.dto.PedidoResponseDTO;
 import br.com.fiap.checkpoint2.model.PedidoModel;
 import br.com.fiap.checkpoint2.repository.PedidoRepository;
 
@@ -17,18 +17,18 @@ public class PedidoService {
     @Autowired
     PedidoRepository pedidoRepository;
 
-    public PedidoDto save(PedidoModel pedidoModel) {
+    public PedidoResponseDTO save(PedidoModel pedidoModel) {
         return modelToDto(pedidoRepository.save(pedidoModel));
     }
 
-    public PedidoDto findById(Long numeroPedido) {
+    public PedidoResponseDTO findById(Long numeroPedido) {
         return modelToDto(pedidoRepository.findById(numeroPedido).get());
     }
 
-    public List<PedidoDto> findAll() {
+    public List<PedidoResponseDTO> findAll() {
 
         List<PedidoModel> listModel = pedidoRepository.findAll();
-        List<PedidoDto> listDto = new ArrayList<>();
+        List<PedidoResponseDTO> listDto = new ArrayList<>();
 
         for(PedidoModel pedido : listModel) {
             listDto.add(modelToDto(pedido));
@@ -37,7 +37,7 @@ public class PedidoService {
         return listDto;
     }
 
-    public PedidoDto update(Long numeroPedido, PedidoModel pedidoModel) {
+    public PedidoResponseDTO update(Long numeroPedido, PedidoModel pedidoModel) {
 
         Optional<PedidoModel> opPedidoUpdate = pedidoRepository.findById(numeroPedido);
 
@@ -64,9 +64,9 @@ public class PedidoService {
         pedidoRepository.delete(opPedidoDelete.get());
     }
 
-    public PedidoDto modelToDto(PedidoModel model) {
+    public PedidoResponseDTO modelToDto(PedidoModel model) {
 
-        PedidoDto dto = new PedidoDto();
+        PedidoResponseDTO dto = new PedidoResponseDTO();
 
         dto.setNumeroPedido(model.getNumero_pedido());
         dto.setCodigoCliente(model.getCodigoCliente());
